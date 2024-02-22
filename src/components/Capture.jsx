@@ -34,9 +34,10 @@ export function Capture() {
 
         const formData = new FormData();
         formData.append('image', file);
+        formData.append('instructions', event.target.instructions.value);
 
         try {
-            const response = await fetch(import.meta.env.VITE_BASE_URL+"backend/recipe"  , {
+            const response = await fetch(  import.meta.env.VITE_BASE_URL+"backend/recipe", {
                 method: "POST",
                 body: formData,
             });
@@ -81,6 +82,8 @@ export function Capture() {
                         className="mb-4"
                     />
                     {error && <div className="text-red-500">{error}</div>}
+                    <div>
+                        <input className='bg-white mr-6 p-2 rounded-md text-black ' type="text" name="instructions" id="" placeholder='Extra instructions if any' />
                     <button 
                         type="submit"
                         disabled={loading} // Disable button while loading
@@ -88,6 +91,9 @@ export function Capture() {
                     >
                         {loading ? 'Loading...' : 'Submit'} {/* Show loading text if loading */}
                     </button>
+
+                    </div>
+
                 </form>
 
                 {/* Render the output below the submit button in mobile devices */}
